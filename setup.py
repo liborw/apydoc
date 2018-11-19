@@ -9,7 +9,7 @@ setup(name='pyapidoc',
       url='https://github.com/liborw/pyapidoc/blob/master/README.md',
       scripts=['bin/pyapidoc'],
       install_requires=[
-          'ninja2',
+          'jinja2',
           'docopt'
       ],
       )
