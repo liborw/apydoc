@@ -27,6 +27,11 @@ list of functions given by get_function
 Get list of function of given object, each function is represented
 by dictionary with fields: name, signature and doc. 
 
+## function `load_template(name:str) -> jinja2.environment.Template`
+
+Load template given by name, or path. If name is given first current
+directory is searched then pyapidoc template directory.
+
 ## function `main()`
 
 Main function of the pyapidoc
