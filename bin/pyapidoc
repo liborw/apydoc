@@ -1,32 +1,32 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Simple documentation utility
+"""Dead simple API documentation generation tool
 
 Usage:
-    simpledoc [options] <module>
+    pyapidoc [options] <module>
 
 Options:
     -h, --help
     -d, --debug
     -t TPL, --template TPL
     -o OUT, --output OUT
-
 """
 
 import os
 import sys
-from docopt import docopt
 import logging
 import inspect
-import pprint
 import jinja2
+from docopt import docopt
 
 
 log = logging.getLogger('simpledoc')
 
 
 def main():
+    """Main function of the pyapidoc"""
+
     sys.path = [os.getcwd()] + sys.path
     log.debug('pwd: %s', os.getcwd())
     log.debug('path: %s', str(sys.path))
@@ -53,7 +53,11 @@ def main():
         f.write(template.render(module=out, trim_blocks=True, lstrip_block=True))
 
 
-def get_classes(obj):
+def get_classes(obj: object) -> list:
+    """Get lisf ot classes of the given object, each class is represented
+    by dictionary with fields: name, doc and functions, where function is 
+    list of functions given by get_function
+    """
     out = list()
     for cl in inspect.getmembers(obj, inspect.isclass):
         if cl[0] != "__class__" and not cl[0].startswith("_"):
@@ -67,7 +71,10 @@ def get_classes(obj):
     return out
 
 
-def get_functions(obj):
+def get_functions(obj: object) -> list:
+    """Get list of function of given object, each function is represented
+    by dictionary with fields: name, signature and doc. 
+    """
     out = list()
     for fce in inspect.getmembers(obj, inspect.isfunction):
 
