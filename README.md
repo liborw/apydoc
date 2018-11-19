@@ -28,9 +28,10 @@ pip install .
 
 ## Usage
 
+How the [api documentation](docs/pyapidoc.md) for this tool is show bellow, it is supposed to be run in the `bin` directory of this repository:
+
 ```
-
-
+$ pyapidoc -f pyapidoc -t script.md.jinja -o ../docs pyapidoc
 ```
 
 ## Templates
