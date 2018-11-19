@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""Simple documentation utility
+
+Usage:
+    simpledoc [options] <module>
+
+Options:
+    -h, --help
+    -d, --debug
+    -t TPL, --template TPL
+    -o OUT, --output OUT
+
+"""
+
+import os
+import sys
+from docopt import docopt
+import logging
+import inspect
+import pprint
+import jinja2
+
+
+log = logging.getLogger('simpledoc')
+
+
+def main():
+    sys.path = [os.getcwd()] + sys.path
+    log.debug('pwd: %s', os.getcwd())
+    log.debug('path: %s', str(sys.path))
+
+    try:
+        mod = __import__(opt['<module>'])
+    except Exception:
+        log.error('Unable to import module %s', opt['<module>'])
+        return
+
+    out = dict()
+    out['name'] = opt['<module>']
+    out['doc'] = inspect.getdoc(mod)
+    out['classes'] = get_classes(mod)
+    out['functions'] = get_functions(mod)
+
+    with open(opt['--template']) as f:
+        template = jinja2.Template(f.read())
+
+    parts = opt['--template'].split('.')
+    ext = parts[-2]
+
+    with open(os.path.join(opt['--output'], opt['<module>'] + '.' + ext), 'w') as f:
+        f.write(template.render(module=out, trim_blocks=True, lstrip_block=True))
+
+
+def get_classes(obj):
+    out = list()
+    for cl in inspect.getmembers(obj, inspect.isclass):
+        if cl[0] != "__class__" and not cl[0].startswith("_"):
+            log.debug('Class: %s file: %s', cl[0], inspect.getfile(cl[1]))
+            outcl = dict()
+            outcl['name'] = cl[0]
+            outcl['doc'] = inspect.getdoc(cl[1])
+            outcl['functions'] = get_functions(cl[1])
+            out.append(outcl)
+
+    return out
+
+
+def get_functions(obj):
+    out = list()
+    for fce in inspect.getmembers(obj, inspect.isfunction):
+
+        outfce = dict()
+        outfce['name'] = fce[0]
+        outfce['signature'] = str(inspect.signature(fce[1]))
+        outfce['doc'] = inspect.getdoc(fce[1])
+
+        out.append(outfce)
+    return out
+
+
+if __name__ == "__main__":
+    opt = docopt(__doc__)
+    logging.basicConfig(level='DEBUG' if opt['--debug'] else 'INFO')
+    main()
+
+

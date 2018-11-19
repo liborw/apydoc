@@ -5,13 +5,30 @@ This project came out as a result of a frustration from the lack of **simple** a
 
 ## Installation
 
-```shell
+- requirements
+    - Python 3.3 and later
+    - [jinja2](http://jinja.pocoo.org/docs/2.10/)
+    - [docopt](http://docopt.org/)
 
+- using `pip`
+
+```
+
+```
+
+- from source
+
+```
+git clone git@github.com:liborw/pyapidoc.git
+cd pyapidoc
+pip install .
 ```
 
 ## Usage
 
-```shell
+```
+
+
 ```
 
 ## Templates
