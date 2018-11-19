@@ -5,18 +5,22 @@
 {{ module.doc }}
 ```
 
+{% if module.classes|length > 0 %}
 ## Classes
+{% endif %}
 {% for class in module.classes %} 
-### class {{ class.name }}
+### {{ class.name }}
 {% for fun in class.functions %}
  - `{{ fun.name }}{{ fun.signature }}`
 
    {{ fun.doc }}
 {% endfor %}
 {% endfor %}
-# Functions
+{% if module.functions|length > 0 %}
+## Functions
+{% endif %}
 {% for fun in module.functions %}
- - function `{{ fun.name }}{{ fun.signature }}`
+ - `{{ fun.name }}{{ fun.signature }}`
 
    {{ fun.doc }}
 {% endfor %}
