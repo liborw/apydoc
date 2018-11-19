@@ -4,18 +4,21 @@
 ```
 {{ module.doc }}
 ```
-{% for class in module.classes %}
-## class {{ class.name }}
+
+## Classes
+{% for class in module.classes %} 
+### class {{ class.name }}
 {% for fun in class.functions %}
-### `{{ fun.name }}{{ fun.signature }}`
+ - `{{ fun.name }}{{ fun.signature }}`
 
-{{ fun.doc }}
+   {{ fun.doc }}
 {% endfor %}
 {% endfor %}
+# Functions
 {% for fun in module.functions %}
-## function `{{ fun.name }}{{ fun.signature }}`
+ - function `{{ fun.name }}{{ fun.signature }}`
 
-{{ fun.doc }}
+   {{ fun.doc }}
 {% endfor %}
 
 ---

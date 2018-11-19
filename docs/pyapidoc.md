@@ -15,26 +15,29 @@ Options:
     --filename FNAME
 ```
 
+## Classes
 
-## function `get_classes(obj:object, module:str=None) -> list`
+# Functions
 
-Get lisf ot classes of the given object, each class is represented
+ - function `get_classes(obj:object, module:str=None) -> list`
+
+   Get lisf ot classes of the given object, each class is represented
 by dictionary with fields: name, doc and functions, where function is 
 list of functions given by get_function
 
-## function `get_functions(obj:object, module:str=None) -> list`
+ - function `get_functions(obj:object, module:str=None) -> list`
 
-Get list of function of given object, each function is represented
+   Get list of function of given object, each function is represented
 by dictionary with fields: name, signature and doc. 
 
-## function `load_template(name:str) -> jinja2.environment.Template`
+ - function `load_template(name:str) -> jinja2.environment.Template`
 
-Load template given by name, or path. If name is given first current
+   Load template given by name, or path. If name is given first current
 directory is searched then pyapidoc template directory.
 
-## function `main()`
+ - function `main()`
 
-Main function of the pyapidoc
+   Main function of the pyapidoc
 
 
 ---
