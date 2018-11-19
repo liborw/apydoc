@@ -1,11 +1,11 @@
 
-# pyapidoc
+# apydoc
 
 ```
 Dead simple API documentation generation tool
 
 Usage:
-    pyapidoc [options] <module>
+    apydoc [options] <module>
 
 Options:
     -h, --help
