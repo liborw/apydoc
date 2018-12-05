@@ -1,0 +1,35 @@
+
+
+# {{ module.name }}
+
+{{ module.doc }}
+
+{% if module.classes|length > 0 %}
+## Classes
+{% endif %}
+{% for class in module.classes %} 
+### {{ class.name }}
+{% for fun in class.functions %}
+ - `{{ fun.name }}{{ fun.signature }}`
+{% if fun.doc %}
+```
+{{ fun.doc }}
+```
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% if module.functions|length > 0 %}
+## Functions
+{% endif %}
+{% for fun in module.functions %}
+ - `{{ fun.name }}{{ fun.signature }}`
+{% if fun.doc %}
+```
+{{ fun.doc }}
+```
+{% endif %}
+{% endfor %}
+
+---
+{{ footer }}
+
